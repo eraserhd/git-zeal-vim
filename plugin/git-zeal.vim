@@ -27,8 +27,12 @@ function! s:show_build_result(commit) abort
 endfunction
 
 function! s:ZealSplit() abort
-  split term://git zeal run
-  resize 7
+  if has('nvim')
+    7split term://git zeal run
+  else
+    terminal git zeal run
+    resize 7
+  endif
   setlocal winfixheight
   nnoremap <buffer> <silent> dd      :<C-U>exe <SID>clear_build(<SID>selected_commit())<CR>
   nnoremap <buffer> <silent> <Enter> :<C-U>exe <SID>show_build_result(<SID>selected_commit())<CR>
