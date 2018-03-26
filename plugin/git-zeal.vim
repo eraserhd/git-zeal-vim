@@ -24,6 +24,9 @@ function! s:show_build_result(commit) abort
   if exists('+relativenumber')
     setlocal norelativenumber
   endif
+  if exists(':AnsiEsc')
+    AnsiEsc
+  endif
 endfunction
 
 function! s:ZealSplit() abort
